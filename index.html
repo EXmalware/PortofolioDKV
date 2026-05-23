@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nilai Portofolio DKV — penilaian tugas siswa Kelas XI & XII">
+  <title>Nilai Portofolio DKV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="rx-bg" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+
+  <header class="site-header">
+    <div class="header-stripe" aria-hidden="true"></div>
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-logo-wrap">
+          <img
+            class="brand-logo"
+            src="https://blogger.googleusercontent.com/img/a/AVvXsEj0gidDMAxs79SkpgBW6-nRy7SLq7ytNTzeXSLp8-sX5SKhlCY7JHDHr7BNvJ9nTF8YgHbB_kubuvfYzX4t4ONGFDfoL2-AMa8mgK29o6XGebiHkSMgiO2BoXpv0fATKQ9XMf-RPWGbqrr_KQ1iVX3JeWYh9JGXR43QSWxyIa2o-qeJR9S0_8dxANpck08"
+            alt="Logo SMK Negeri 1 Bumijawa"
+            width="56"
+            height="56"
+          >
+        </div>
+        <div>
+          <p class="brand-tag">SMK Negeri 1 Bumijawa · Desain Komunikasi Visual</p>
+          <h1>Nilai Portofolio</h1>
+          <p class="brand-sub" id="mapel-info">Memuat data mata pelajaran…</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <nav id="breadcrumb" class="breadcrumb hidden" aria-label="Navigasi"></nav>
+
+    <div id="loading" class="loading" role="status">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Memuat data penilaian…</p>
+    </div>
+
+    <div id="error" class="error-panel hidden" role="alert"></div>
+
+    <!-- Langkah 1: Pilih angkatan (tengah) -->
+    <section id="view-angkatan" class="view view--hub hidden" aria-label="Pilih angkatan">
+      <div class="hub-panel">
+        <header class="hub-header">
+          <span class="hub-step">01</span>
+          <h2 class="hub-title">Pilih Angkatan</h2>
+          <p class="hub-desc">Pilih tingkat kelas untuk melanjutkan</p>
+        </header>
+        <div id="angkatan-grid" class="card-grid card-grid--hub"></div>
+      </div>
+    </section>
+
+    <!-- Langkah 2: Pilih kelas (tengah) -->
+    <section id="view-kelas" class="view view--hub hidden" aria-label="Pilih kelas">
+      <div class="hub-panel">
+        <header class="hub-header">
+          <span class="hub-step">02</span>
+          <h2 class="hub-title" id="kelas-view-title">Pilih Kelas</h2>
+          <p class="hub-desc" id="kelas-view-desc"></p>
+        </header>
+        <div id="kelas-grid" class="card-grid card-grid--hub"></div>
+      </div>
+    </section>
+
+    <!-- Langkah 3: Daftar siswa -->
+    <section id="view-siswa" class="view hidden" aria-label="Daftar siswa">
+      <div class="view-toolbar">
+        <div class="toolbar-head">
+          <span class="hub-step hub-step--sm">03</span>
+          <div>
+            <h2 class="view-title" id="siswa-view-title">Daftar Siswa</h2>
+            <p class="view-desc" id="siswa-view-desc"></p>
+          </div>
+        </div>
+        <div class="toolbar-actions">
+          <div class="semester-toggle" role="group" aria-label="Semester">
+            <button type="button" class="sem-btn active" data-sem="1">Semester 1</button>
+            <button type="button" class="sem-btn" data-sem="2">Semester 2</button>
+          </div>
+          <label class="search-field">
+            <span class="sr-only">Cari siswa</span>
+            <input type="search" id="search" placeholder="Cari nama atau NIS…" autocomplete="off">
+          </label>
+        </div>
+      </div>
+      <div id="siswa-grid" class="card-grid card-grid--students"></div>
+      <p id="empty-state" class="empty-state hidden">Tidak ada siswa yang cocok.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-stripe" aria-hidden="true"></div>
+    <div class="container footer-inner">
+      <img
+        class="footer-logo"
+        src="https://blogger.googleusercontent.com/img/a/AVvXsEj0gidDMAxs79SkpgBW6-nRy7SLq7ytNTzeXSLp8-sX5SKhlCY7JHDHr7BNvJ9nTF8YgHbB_kubuvfYzX4t4ONGFDfoL2-AMa8mgK29o6XGebiHkSMgiO2BoXpv0fATKQ9XMf-RPWGbqrr_KQ1iVX3JeWYh9JGXR43QSWxyIa2o-qeJR9S0_8dxANpck08"
+        alt="Logo SMK Negeri 1 Bumijawa"
+        width="72"
+        height="72"
+      >
+      <p class="footer-text">Guru Mata Pelajaran : David Faizal, S.Kom.</p>
+    </div>
+  </footer>
+
+  <dialog id="detail-dialog" class="detail-dialog">
+    <div class="dialog-header">
+      <h2 id="dialog-title">Detail Nilai</h2>
+      <button type="button" class="dialog-close" id="dialog-close" aria-label="Tutup">✕</button>
+    </div>
+    <div class="dialog-body" id="dialog-body"></div>
+  </dialog>
+
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>
