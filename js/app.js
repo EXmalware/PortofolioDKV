@@ -38,6 +38,11 @@ const els = {
   kelasGrid: $("#kelas-grid"),
   kelasViewTitle: $("#kelas-view-title"),
   kelasViewDesc: $("#kelas-view-desc"),
+  taskCatalogDesc: $("#task-catalog-desc"),
+  taskCatalogList: $("#task-catalog-list"),
+  taskCatalogContent: $("#task-catalog-content"),
+  taskCatalogToggle: $("#task-catalog-toggle"),
+  classListCount: $("#class-list-count"),
   siswaGrid: $("#siswa-grid"),
   siswaViewTitle: $("#siswa-view-title"),
   siswaViewDesc: $("#siswa-view-desc"),
@@ -52,7 +57,8 @@ const els = {
 // ─── Data fetching ───────────────────────────────────────────
 
 async function fetchSheet(sheetName, { reference = false } = {}) {
-  const url = `${BASE_URL}?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+  const headers = reference ? "&headers=0" : "";
+  const url = `${BASE_URL}?tqx=out:json&sheet=${encodeURIComponent(sheetName)}${headers}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Gagal memuat sheet "${sheetName}" (${res.status})`);
   const text = await res.text();
@@ -332,9 +338,35 @@ function renderKelas() {
   const rows = getRowsForLevel(state.level);
   const classes = getUniqueClasses(rows);
   const mapel = getMapelForLevel(state.level);
+  const reffMap = buildReffMap();
 
   els.kelasViewTitle.textContent = `Kelas — Angkatan ${state.level}`;
   els.kelasViewDesc.textContent = `${mapel} · ${rows.length} siswa · ${classes.length} kelas`;
+  els.taskCatalogDesc.textContent = `${state.level} · ${TASK_KEYS.length} tugas`;
+  els.taskCatalogList.innerHTML = [1, 2]
+    .map((semester) => `
+      <section class="task-semester" aria-label="Daftar tugas semester ${semester}">
+        <h4 class="task-semester__title">Semester ${semester}</h4>
+        <ol class="task-semester__list">
+          ${getTasksForSemester(semester)
+            .map((task) => {
+              const ref = getTaskRef(task, state.level, reffMap);
+              const jenisLabel = getJenisLabel(ref.jenis);
+              const jenisClass = ref.jenis === "M" ? "mandiri" : ref.jenis === "K" ? "kelompok" : "";
+              return `
+                <li class="task-catalog__item">
+                  <span class="task-catalog__number">${escapeHtml(task.replace("Tugas ", ""))}</span>
+                  <span class="task-catalog__name">${escapeHtml(ref.nama)}</span>
+                  ${jenisLabel ? `<span class="jenis-badge jenis-badge--${jenisClass}">${escapeHtml(jenisLabel)}</span>` : ""}
+                </li>
+              `;
+            })
+            .join("")}
+        </ol>
+      </section>
+    `)
+    .join("");
+  els.classListCount.textContent = `${classes.length} kelas`;
 
   els.kelasGrid.innerHTML = classes
     .map((kelas) => {
@@ -538,6 +570,16 @@ async function init() {
 }
 
 // ─── Events ──────────────────────────────────────────────────
+
+els.taskCatalogToggle.addEventListener("click", () => {
+  const isExpanded = els.taskCatalogToggle.getAttribute("aria-expanded") === "true";
+  els.taskCatalogToggle.setAttribute("aria-expanded", String(!isExpanded));
+  els.taskCatalogToggle.setAttribute(
+    "aria-label",
+    isExpanded ? "Buka daftar tugas" : "Tutup daftar tugas"
+  );
+  els.taskCatalogContent.hidden = isExpanded;
+});
 
 document.querySelectorAll(".sem-btn").forEach((btn) => {
   btn.addEventListener("click", () => {

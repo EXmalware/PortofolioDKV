@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nilai Portofolio DKV — penilaian tugas siswa Kelas XI & XII">
+  <meta name="description" content="Ruang Nilai DKV — penilaian tugas siswa Kelas XI & XII SMK Negeri 1 Bumijawa">
+  <meta name="theme-color" content="#f5f2eb">
   <title>Nilai Portofolio DKV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -28,7 +29,7 @@
           >
         </div>
         <div>
-          <p class="brand-tag">SMK Negeri 1 Bumijawa · Desain Komunikasi Visual</p>
+          <p class="brand-tag">SMK Negeri 1 Bumijawa <span aria-hidden="true">/</span> Desain Komunikasi Visual</p>
           <h1>Nilai Portofolio</h1>
           <p class="brand-sub" id="mapel-info">Memuat data mata pelajaran…</p>
         </div>
@@ -66,7 +67,33 @@
           <h2 class="hub-title" id="kelas-view-title">Pilih Kelas</h2>
           <p class="hub-desc" id="kelas-view-desc"></p>
         </header>
+        <div class="class-list-heading">
+          <h3>Pilih Kelas</h3>
+          <span id="class-list-count"></span>
+        </div>
         <div id="kelas-grid" class="card-grid card-grid--hub"></div>
+        <section class="task-catalog" aria-labelledby="task-catalog-title">
+          <div class="task-catalog__header">
+            <div>
+              <p class="task-catalog__eyebrow">Materi penilaian</p>
+              <h3 id="task-catalog-title" class="task-catalog__title">Daftar Tugas</h3>
+            </div>
+            <div class="task-catalog__actions">
+              <p id="task-catalog-desc" class="task-catalog__desc"></p>
+              <button
+                type="button"
+                id="task-catalog-toggle"
+                class="task-catalog__toggle"
+                aria-label="Buka daftar tugas"
+                aria-expanded="false"
+                aria-controls="task-catalog-content"
+              ></button>
+            </div>
+          </div>
+          <div id="task-catalog-content" hidden>
+            <div id="task-catalog-list" class="task-catalog__grid"></div>
+          </div>
+        </section>
       </div>
     </section>
 
