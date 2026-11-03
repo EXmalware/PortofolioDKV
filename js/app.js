@@ -312,16 +312,18 @@ function renderAngkatan() {
           : 0;
 
       return `
-        <button type="button" class="nav-card nav-card--${color}" data-level="${id}">
-          <span class="nav-card__badge">${icon}</span>
+        <button type="button" class="nav-card nav-card--${color} nav-card--cohort" data-level="${id}">
+          <span class="nav-card__watermark" aria-hidden="true">${icon}</span>
+          <span class="nav-card__eyebrow">Tahun ajaran · DKV</span>
           <h3 class="nav-card__title">${label}</h3>
           <p class="nav-card__mapel">${escapeHtml(mapel)}</p>
-          <ul class="nav-card__stats">
-            <li><strong>${classes.length}</strong> kelas</li>
-            <li><strong>${rows.length}</strong> siswa</li>
-            <li><strong>${avgProgress}%</strong> progress rata-rata</li>
-          </ul>
-          <span class="nav-card__cta">Pilih kelas →</span>
+          <span class="nav-card__rule" aria-hidden="true"></span>
+          <span class="nav-card__stats nav-card__stats--cohort">
+            <span class="nav-card__stat"><strong>${classes.length}</strong><span>kelas</span></span>
+            <span class="nav-card__stat"><strong>${rows.length}</strong><span>siswa</span></span>
+            <span class="nav-card__stat"><strong>${avgProgress}%</strong><span>progres</span></span>
+          </span>
+          <span class="nav-card__cta"><span>Pilih angkatan</span><span class="nav-card__arrow" aria-hidden="true">↗</span></span>
         </button>
       `;
     })
@@ -384,14 +386,18 @@ function renderKelas() {
 
       return `
         <button type="button" class="nav-card nav-card--kelas" data-kelas="${escapeHtml(kelas)}">
-          <span class="nav-card__icon" aria-hidden="true">🏫</span>
-          <h3 class="nav-card__title">${escapeHtml(kelas)}</h3>
-          <ul class="nav-card__stats">
-            <li><strong>${classRows.length}</strong> siswa</li>
-            <li>Rata: <strong>${avgRata > 0 ? avgRata.toFixed(1).replace(".", ",") : "-"}</strong></li>
-            <li>Progress SMT ${sem}: <strong>${avgProgress}%</strong></li>
-          </ul>
-          <span class="nav-card__cta">Lihat siswa →</span>
+          <span class="nav-card__class-top">
+            <span class="nav-card__class-mark" aria-hidden="true">DKV</span>
+            <span class="nav-card__class-index">${escapeHtml(state.level)}</span>
+          </span>
+          <span class="nav-card__class-title">${escapeHtml(kelas)}</span>
+          <span class="nav-card__stats nav-card__stats--class">
+            <span class="nav-card__stat"><strong>${classRows.length}</strong><span>siswa</span></span>
+            <span class="nav-card__stat"><strong>${avgRata > 0 ? avgRata.toFixed(1).replace(".", ",") : "-"}</strong><span>rata-rata</span></span>
+          </span>
+          <span class="nav-card__progress-label"><span>Progres SMT ${sem}</span><strong>${avgProgress}%</strong></span>
+          <span class="nav-card__progress"><span style="width:${avgProgress}%"></span></span>
+          <span class="nav-card__cta"><span>Lihat siswa</span><span class="nav-card__arrow" aria-hidden="true">↗</span></span>
         </button>
       `;
     })
